@@ -1,0 +1,14 @@
+D:\H\studyProject\Lotto\Lotto\bin\Debug\Lotto.exe.config
+D:\H\studyProject\Lotto\Lotto\obj\Debug\Lotto.csprojResolveAssemblyReference.cache
+D:\H\studyProject\Lotto\Lotto\bin\Debug\Lotto.exe
+D:\H\studyProject\Lotto\Lotto\bin\Debug\Lotto.pdb
+D:\H\studyProject\Lotto\Lotto\obj\Debug\Lotto.exe
+D:\H\studyProject\Lotto\Lotto\obj\Debug\Lotto.pdb
+D:\H\studyProject\Lotto\Lotto\bin\Debug\HtmlAgilityPack.dll
+D:\H\studyProject\Lotto_Base\Lotto\bin\Debug\Lotto.exe.config
+D:\H\studyProject\Lotto_Base\Lotto\obj\Debug\Lotto.exe
+D:\H\studyProject\Lotto_Base\Lotto\obj\Debug\Lotto.pdb
+D:\H\studyProject\Lotto_Base\Lotto\bin\Debug\Lotto.exe
+D:\H\studyProject\Lotto_Base\Lotto\bin\Debug\Lotto.pdb
+D:\H\studyProject\Lotto_Base\Lotto\bin\Debug\HtmlAgilityPack.dll
+D:\H\studyProject\Lotto_Base\Lotto\obj\Debug\Lotto.csprojResolveAssemblyReference.cache
