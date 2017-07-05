@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -298,6 +299,24 @@ namespace Lotto_form
 
             label13.Text = "번호를 입력해 주세요.";
             label14.Text = "번호를 입력해 주세요.";
+        }
+
+
+        private void resultsListView_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.C)
+                CopySelectedValuesToClipboard();
+
+
+        }
+
+        private void CopySelectedValuesToClipboard()
+        {
+            var builder = new StringBuilder();
+            foreach (ListViewItem item in listView1.SelectedItems)
+                builder.AppendLine(item.SubItems[1].Text);
+
+            Clipboard.SetText(builder.ToString());
         }
     }
 }
