@@ -19,7 +19,7 @@ namespace Lotto_form
     {
         Lotto_Request Request = new Lotto_Request();
 
-        public List<string>  GetNum100()
+        public List<string> GetNum100()
         {
             //최근 100회차 요청
             foreach (var s in Enumerable.Range(1, 10))
@@ -29,7 +29,7 @@ namespace Lotto_form
 
             return Request.Number_100;
 
-            
+
         }
 
 
@@ -40,9 +40,25 @@ namespace Lotto_form
             return Request.statByNumber;
 
         }
-        public List<Lotto_100> GetLotto100() {
+        public List<Lotto_100> GetLotto100()
+        {
             return Request.Lotto_100;
         }
+
+        public Lotto_Winner GetLotto_Winner()
+        {
+            Request.GetList_GetResult();
+
+            Lotto_Winner Winner = new Lotto_Winner();
+            Winner.WinNum_Arr = Request.WinNum_Arr;
+            Winner.WinNum_string = Request.WinNum_string;
+            Winner.WinNum_Turn = Request.WinNum_Turn;
+            Winner.Bouns = Request.Bouns;
+            return Winner;
+        }
+
+
+        
 
 
     }
@@ -52,7 +68,12 @@ namespace Lotto_form
         public List<statByNumber> statByNumber = new List<statByNumber>();
         public List<string> Number_100 = new List<string>();
         public List<Lotto_100> Lotto_100 = new List<Lotto_100>();
-        
+        public string WinNum_string = "";
+        public string[] WinNum_Arr;
+        public string WinNum_Turn = "";
+        public string Bouns = "";
+
+
 
         public void GetList_allWin(string Page)
         {
@@ -99,7 +120,7 @@ namespace Lotto_form
 
                     foreach (var num in Data.Data.Split(','))
                     {
-                        Number_100.Add(num);
+                        Number_100.Add(num.Trim());
                     }
                 }
             }
@@ -140,11 +161,58 @@ namespace Lotto_form
                     statByNumber Data = new statByNumber();
                     string Number = td[0].Element("img").Attributes[1].Value;
                     Number = Number.Substring(0, Number.Length - 2);
-                    Data.Number = Number;
+                    Data.Number = Number.Trim();
                     Data.stat = Convert.ToInt32(td[2].InnerText);
                     statByNumber.Add(Data);
                 }
             }
+        }
+
+        public void GetList_GetResult()
+        {
+            Uri url = new Uri("http://www.nlotto.co.kr/gameResult.do?method=byWin");
+            HttpWebRequest WebRequestObject = (HttpWebRequest)HttpWebRequest.Create(url);
+            WebRequestObject.Method = "POST";
+            WebRequestObject.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+
+
+            Stream dataStream = WebRequestObject.GetRequestStream();
+            WebResponse response = WebRequestObject.GetResponse();
+            dataStream = response.GetResponseStream();
+            StreamReader reader = new StreamReader(dataStream);
+            string html = reader.ReadToEnd();
+            response.Close();
+
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(html);
+            var num_img = doc.DocumentNode.Element("html").Element("body").Element("section").Element("article").Element("article").Element("div").Elements("div").ElementAt(1).Element("p").Elements("img");
+
+
+            Bouns = doc.DocumentNode.Element("html").Element("body").Element("section").Element("article").Element("article").Element("div").Elements("div").ElementAt(1).Element("p").Elements("span").ElementAt(1).Element("img").Attributes.ElementAt(1).Value;
+
+            WinNum_Turn = doc.DocumentNode.Element("html").Element("body").Element("section").Element("article").Element("article").Element("div").Elements("div").ElementAt(1).Element("h3").Element("strong").InnerText;
+
+
+            foreach (var s in num_img)
+            {
+
+                if (s.Attributes.Count == 2)
+                {
+                    string num = s.Attributes.ElementAt(1).Value.ToString().Trim();
+
+                    if (string.IsNullOrEmpty(WinNum_string))
+                    {
+                        WinNum_string = num;
+                    }
+                    else {
+                        WinNum_string += "," + num;
+                    }
+
+                }
+            }
+
+            WinNum_Arr = WinNum_string.Split(',');
+
         }
     }
 
@@ -159,6 +227,20 @@ namespace Lotto_form
         public string No { get; set; }
         public string Data { get; set; }
     }
+
+    public class Lotto_Winner
+    {
+        public string WinNum_string { get; set; }
+        public string[] WinNum_Arr { get; set; }
+        public string WinNum_Turn { get; set; }
+        public string Bouns { get; set; }
+        
+    }
+
+
+    
+
+
 
 
 }

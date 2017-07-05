@@ -8,3 +8,13 @@ D:\H\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.csproj.GenerateReso
 D:\H\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.exe
 D:\H\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.pdb
 D:\H\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.Form1.resources
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\bin\Debug\Lotto_form.exe.config
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.exe
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.pdb
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\bin\Debug\Lotto_form.exe
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\bin\Debug\Lotto_form.pdb
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\bin\Debug\HtmlAgilityPack.dll
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.csprojResolveAssemblyReference.cache
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.Properties.Resources.resources
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.csproj.GenerateResource.Cache
+D:\H\깃허브\studyProject\Lotto_form\Lotto_form\obj\Debug\Lotto_form.Form1.resources
