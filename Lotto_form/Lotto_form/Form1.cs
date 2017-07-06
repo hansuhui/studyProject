@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -318,6 +319,66 @@ namespace Lotto_form
 
             Clipboard.SetText(builder.ToString());
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (this.listView1.Items.Count == 0)
+            {
+                MessageBox.Show("번호를 생성해 주세요.", "알림");
+            }
+            else {
+                string Mail_to = Microsoft.VisualBasic.Interaction.InputBox("메일 주소를 입력해주세요.", "메일","메일주소",0,0);
+                if (IsValidEmail(Mail_to))
+                {
+                    string Msg = GetMailMsg();
+                    new Mail_Smtp().Send(Mail_to, Msg);
+                }
+                else {
+                    MessageBox.Show("잘못된 이메일 주소 입니다.", "알림");
+                }
+                
+            }
+        }
+
+        private string GetMailMsg() {
+            string Msg = " ";
+            string Number = " ";
+            Msg = @"
+                     <div style='height:370px;border:1px solid;'>
+                           <div style='height:50px;background-color:darkGrey'>
+            	             <p style='margin: 0px;text-align:center;padding-top:13px'>
+            		               <b style='font-size: 19px;'>생성된 로또 번호</b>
+            	             </p>
+                           </div>
+                             <div style='height:230px;padding:10px;text-align:center;'>
+            	             <p style='margin: 0px; line-height: 1.7;;font-size:13px;'>
+            		               요청하신 번호입니다. <br/>
+                                   <p style='color: mediumslateblue;font-weight: bold;' >{0}</p>
+            	             </p>
+                            </div>
+                               <div style='height:70px;background-color:darkGrey'>
+            		               <p style='margin: 0px;padding:15px;'>회사 정보,로고</p>
+            	               </div>
+                  </div>
+                ";
+
+            foreach (var s in Enumerable.Range(0, 9))
+            {
+
+                Number += "<br/>" + this.listView1.Items[s].SubItems[1].Text; ;
+            }
+
+            Msg = string.Format(Msg, Number);
+            return Msg;
+        }
+
+        public bool IsValidEmail(string email)
+        {
+            bool valid = Regex.IsMatch(email, "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+            return valid;
+        }
+
+
     }
 }
 
